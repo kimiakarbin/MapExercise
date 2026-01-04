@@ -16,27 +16,27 @@ struct BeanTownButtons: View {
     var body: some View{
         HStack{
             Button{
-                onSearchSelected ( "playground")}label: {
-                    Label("playground", systemImage: "figure.child.holdinghands")
+                onSearchSelected ( "park")}label: {
+                    Label("park", systemImage: "tree")
                 }
                 .buttonStyle(.borderedProminent)
             Button{
-                onSearchSelected("beach")
+                onSearchSelected("taxi stand")
             }label: {
-                Label("beach", systemImage: "beach.umbrella")
+                Label("taxi stand", systemImage: "car.rear")
             }
             .buttonStyle(.borderedProminent)
             
         Button{
-            onPosition(.region(.boston))
+            onPosition(.region(.turin))
         } label: {
-            Label("Boston", systemImage: "building.2")
+            Label("Turin", systemImage: "house")
         }
         .buttonStyle(.bordered)
         Button{
-            onPosition(.region(.northShore))
+            onPosition(.region(.milan))
             } label: {
-                Label("North Shore", systemImage: "water.waves")
+                Label("Milan", systemImage: "building.2")
             }
             .buttonStyle(.bordered)
             }

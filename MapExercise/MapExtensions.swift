@@ -9,15 +9,15 @@ import MapKit
 
 
 extension CLLocationCoordinate2D{
-    static let parking = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+    static let parking = CLLocationCoordinate2D(latitude: 45.062861, longitude: 7.678029)
 }
 extension MKCoordinateRegion{
-    static let boston = MKCoordinateRegion(
-        center :CLLocationCoordinate2D(latitude: 42.360256, longitude: -71.057279),
-        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    static let turin = MKCoordinateRegion(
+        center :CLLocationCoordinate2D(latitude: 45.07351, longitude: 7.68148),
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
     )
-    static let northShore = MKCoordinateRegion(
-        center :CLLocationCoordinate2D(latitude: 42.547408, longitude: -70.870085),
+    static let milan = MKCoordinateRegion(
+        center :CLLocationCoordinate2D(latitude: 45.46718, longitude: 9.18966),
         span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
     )
 }

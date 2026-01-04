@@ -35,6 +35,16 @@ struct ContentView: View {
             }
             .annotationTitles(.hidden)
             UserAnnotation()
+            if let route = viewModel.route {
+                MapPolyline(route)
+                    .stroke(.blue, lineWidth: 5)
+            }
+            MapPolyline(coordinates: turinPolygon)
+                .stroke(.black, lineWidth: 1)
+            
+//            MapPolygon(coordinates: turinPolygon)
+//                .foregroundStyle(.black.opacity(0.2))
+//                .bordered(Color.black.opacity(0.9))
         }
         .mapStyle(.standard (elevation: .realistic))
         .safeAreaInset(edge: .bottom,){
