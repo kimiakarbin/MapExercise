@@ -66,9 +66,13 @@ struct ContentView: View {
         .onChange(of: viewModel.searchResults){
             viewModel.position = .automatic
         }
-        
-
-        onMapCameraChange {context in
+        .onChange(of: viewModel.SelectedResult) { oldValue, newValue in
+            if let newValue = newValue, oldValue != newValue {
+                viewModel.requestRoute(destination: newValue)
+                viewModel.getLookAroundScene(for: newValue)
+            }
+        }
+        .onMapCameraChange {context in
             viewModel.visibleRegion = context.region
         }
         .mapControls{
