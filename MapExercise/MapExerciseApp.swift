@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 @main
 struct MapExerciseApp: App {
     var body: some Scene {
