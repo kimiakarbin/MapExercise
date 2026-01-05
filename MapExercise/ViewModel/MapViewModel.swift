@@ -23,7 +23,7 @@ final class MapViewModel: ObservableObject {
 
     func requestRoute(destination: MKMapItem) {
         let request = MKDirections.Request()
-        request.source = MKMapItem(placemark:MKPlacemark(coordinate: .parking))
+        request.source = MKMapItem/*(placemark:MKPlacemark(coordinate: .parking))*/.forCurrentLocation()
         request.destination = destination
         
       Task {
