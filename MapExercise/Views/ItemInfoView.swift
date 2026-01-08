@@ -7,24 +7,27 @@
 import SwiftUI
 import MapKit
 
+
+
 struct ItemInfoView: View {
     
-    let travelTimeText: String?
     let name: String
+    let travelTimeText: String?
     let lookAroundScene: MKLookAroundScene?
     
     var body : some View {
-        LookAroundPreview(initialScene: lookAroundScene)
-            .overlay(alignment: .bottomTrailing){
-                HStack{
-                    Text("\(name)")
-                    if let travelTimeText{
+        LookAroundPreview( initialScene: lookAroundScene )
+            .overlay( alignment: .bottomTrailing ){
+                HStack {
+                    Text(name)
+                    
+                    if let travelTimeText {
                         Text(travelTimeText)
                     }
                 }
-                .font(.caption)
-                .foregroundStyle(.white)
-                .padding(10)
+                    .font(.caption)
+                    .foregroundStyle(.white)
+                    .padding(10)
             }
         
     }

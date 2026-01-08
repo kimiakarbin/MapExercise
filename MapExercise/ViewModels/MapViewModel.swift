@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 import MapKit
 import Observation
 
@@ -15,12 +14,12 @@ import Observation
 @Observable final class MapViewModel {
  
      var route: MKRoute?
+     var selectedResult: MKMapItem?
+     var expectedTravelTime: String?
      var searchResults: [MKMapItem] = []
      var visibleRegion: MKCoordinateRegion?
+     var lookAroundScene: MKLookAroundScene?
      var position: MapCameraPosition = .automatic
-     var SelectedResult: MKMapItem?
-     var LookAroundScene: MKLookAroundScene?
-     var expectedTravelTime: String?
      var selectedCoordinate: CLLocationCoordinate2D?
 
 
@@ -33,7 +32,7 @@ import Observation
          let directions = MKDirections(request: request)
          let response = try? await directions.calculate()
          route = response?.routes.first
-        expectedTravelTime = computedTravelTime
+         expectedTravelTime = computedTravelTime
         }
     }
     
@@ -53,24 +52,24 @@ import Observation
     }
 
     func resultSelected(result: MKMapItem) {
-        SelectedResult = result
+        selectedResult = result
         requestRoute(destination: result)
         getLookAroundScene(for: result)
     }
     
     private var computedTravelTime : String?{
         guard let route else { return nil }
-        let Formatter = DateComponentsFormatter()
-        Formatter.unitsStyle = .abbreviated
-        Formatter.allowedUnits = [.minute, .hour]
-        return Formatter.string(from: route.expectedTravelTime)
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.minute, .hour]
+        return formatter.string(from: route.expectedTravelTime)
     }
     
     func getLookAroundScene(for item: MKMapItem){
-        LookAroundScene = nil
+        lookAroundScene = nil
         Task {
             let request = MKLookAroundSceneRequest(mapItem : item)
-            LookAroundScene = try? await request.scene
+            lookAroundScene = try? await request.scene
         }
     }
 }
