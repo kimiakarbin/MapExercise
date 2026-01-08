@@ -7,13 +7,13 @@
 
 import SwiftUI
 import MapKit
-
+import Observation
 
 
 
 struct ContentView: View {
     
-    @StateObject var viewModel: MapViewModel = MapViewModel()
+   @Bindable var viewModel: MapViewModel
 
     var body: some View {
         Map(position: $viewModel.position, selection: $viewModel.SelectedResult ){
@@ -100,7 +100,7 @@ struct ContentView: View {
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
-            ContentView()
+            ContentView(viewModel: MapViewModel())
         }
     }
 

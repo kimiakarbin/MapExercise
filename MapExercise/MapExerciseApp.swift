@@ -10,9 +10,10 @@ import SwiftUI
 
 @main
 struct MapExerciseApp: App {
+    let viewModel = MapViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: viewModel)
         }
     }
 }

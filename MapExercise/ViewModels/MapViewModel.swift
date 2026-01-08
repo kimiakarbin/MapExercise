@@ -8,17 +8,20 @@
 import SwiftUI
 import Combine
 import MapKit
+import Observation
+
+
 @MainActor
-final class MapViewModel: ObservableObject {
+@Observable final class MapViewModel {
  
-    @Published var route: MKRoute?
-    @Published var searchResults: [MKMapItem] = []
-    @Published var visibleRegion: MKCoordinateRegion?
-    @Published var position: MapCameraPosition = .automatic
-    @Published var SelectedResult: MKMapItem?
-    @Published var LookAroundScene: MKLookAroundScene?
-    @Published var expectedTravelTime: String?
-    @Published var selectedCoordinate: CLLocationCoordinate2D?
+     var route: MKRoute?
+     var searchResults: [MKMapItem] = []
+     var visibleRegion: MKCoordinateRegion?
+     var position: MapCameraPosition = .automatic
+     var SelectedResult: MKMapItem?
+     var LookAroundScene: MKLookAroundScene?
+     var expectedTravelTime: String?
+     var selectedCoordinate: CLLocationCoordinate2D?
 
 
     func requestRoute(destination: MKMapItem) {
