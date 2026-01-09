@@ -1,5 +1,5 @@
 //
-//  MapViewModel.swift
+//  MapActionButtonsView.swift
 //  MapExercise
 //
 //  Created by KimiaKarbin on 02/01/26.
@@ -10,7 +10,7 @@ import MapKit
 
 
 
-struct BeanTownButtons: View {
+struct MapActionButtonsView : View {
    
     let onSearchSelected: (String) -> Void
     let onPosition: (MapCameraPosition) -> Void
