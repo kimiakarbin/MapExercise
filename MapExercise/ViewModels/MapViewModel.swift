@@ -8,12 +8,14 @@
 import SwiftUI
 import MapKit
 import Observation
+import CoreLocation
 
 
 @MainActor
-@Observable final class MapViewModel {
+@Observable class MapViewModel {
  
      var route: MKRoute?
+     var userLocation: CLLocation?
      var selectedResult: MKMapItem?
      var expectedTravelTime: String?
      var searchResults: [MKMapItem] = []
@@ -21,6 +23,9 @@ import Observation
      var lookAroundScene: MKLookAroundScene?
      var position: MapCameraPosition = .automatic
      var selectedCoordinate: CLLocationCoordinate2D?
+     var locationAuthorizationStatus: CLAuthorizationStatus?
+    
+
 
      let routeService = RouteService()
     
@@ -30,42 +35,49 @@ import Observation
             self.expectedTravelTime = self.computedTravelTime
         }
      }
-
-    func search(for query: String){
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = query
-        request.resultTypes = .pointOfInterest
-        request.region = visibleRegion ?? MKCoordinateRegion(
+    
+    
+    
+    let searchService = SearchService()
+    
+    func search(for query: String) {
+        let region = visibleRegion ?? MKCoordinateRegion(
             center: .parking,
-            span: MKCoordinateSpan(latitudeDelta: 0.0125, longitudeDelta: 0.0125))
-
-        Task {
-            let search = MKLocalSearch(request: request)
-            let response = try? await search.start()
-            searchResults = response?.mapItems ?? []
+            span: MKCoordinateSpan(
+                latitudeDelta: 0.0125,
+                longitudeDelta: 0.0125
+            )
+        )
+        searchService.search(for: query, region: region) { results in
+            self.searchResults = results
         }
     }
 
+    
+    let lookAroundService = LookAroundService()
+    
+    func getLookAroundScene(for item: MKMapItem){
+        lookAroundService.getLookAroundScene(for: item){scene in
+            self.lookAroundScene = scene
+        }
+    }
+    
+    
+    
     func resultSelected(result: MKMapItem) {
         selectedResult = result
         requestRoute(destination: result)
         getLookAroundScene(for: result)
     }
     
-    private var computedTravelTime : String?{
+    
+   var computedTravelTime : String?{
         guard let route else { return nil }
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated
         formatter.allowedUnits = [.minute, .hour]
         return formatter.string(from: route.expectedTravelTime)
     }
-    
-    func getLookAroundScene(for item: MKMapItem){
-        lookAroundScene = nil
-        Task {
-            let request = MKLookAroundSceneRequest(mapItem : item)
-            lookAroundScene = try? await request.scene
-        }
-    }
+
 }
    
