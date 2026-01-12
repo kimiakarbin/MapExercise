@@ -22,20 +22,15 @@ import Observation
      var position: MapCameraPosition = .automatic
      var selectedCoordinate: CLLocationCoordinate2D?
 
-
-    func requestRoute(destination: MKMapItem) {
-        let request = MKDirections.Request()
-        request.source = MKMapItem/*(placemark:MKPlacemark(coordinate: .parking))*/.forCurrentLocation()
-        request.destination = destination
-        
-      Task {
-         let directions = MKDirections(request: request)
-         let response = try? await directions.calculate()
-         route = response?.routes.first
-         expectedTravelTime = computedTravelTime
-        }
-    }
+     let routeService = RouteService()
     
+     func requestRoute(destination: MKMapItem) {
+        routeService.requestRoute(destination: destination) { route in
+            self.route = route
+            self.expectedTravelTime = self.computedTravelTime
+        }
+     }
+
     func search(for query: String){
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
