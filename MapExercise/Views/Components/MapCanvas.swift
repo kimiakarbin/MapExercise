@@ -14,10 +14,11 @@ struct MapCanvas: View {
     @Binding var position: MapCameraPosition
     @Binding var selectedResult: MKMapItem?
     @Binding var lookAroundScene: MKLookAroundScene?
-    
+    let pins: [Pin]
     let expectedTravelTime: String?
     let ruote: MKRoute?
     let searchResults: [MKMapItem]
+   
     
     var body: some View {
         Map(
@@ -26,6 +27,15 @@ struct MapCanvas: View {
         ) {
             ParkingAnnotation.content(coordinate: .parking)
             // Marker("Parking", coordinate: .parking)
+            ForEach(pins) { pin in
+                Marker(
+                    pin.title,
+                    coordinate: CLLocationCoordinate2D(
+                        latitude: pin.coordinate.latitude,
+                        longitude: pin.coordinate.longitude
+                    )
+                )
+            }
             ForEach(
                 searchResults,
                 id: \.self

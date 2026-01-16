@@ -1,0 +1,24 @@
+{
+  "data": {
+    "pins": [
+      {
+        "id": "pin_1",
+        "title": "Parking Porta Nuova",
+        "subtitle": "Near Torino Porta Nuova Station",
+        "coordinate": {
+          "latitude": 45.0619,
+          "longitude": 7.6789
+        }
+      },
+      {
+        "id": "pin_2",
+        "title": "Parking Castello",
+        "subtitle": "Underground parking near Piazza Castello",
+        "coordinate": {
+          "latitude": 45.0703,
+          "longitude": 7.6869
+        }
+      }
+    ]
+  }
+}

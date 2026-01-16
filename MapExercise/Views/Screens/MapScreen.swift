@@ -17,10 +17,10 @@ struct MapScreen: View {
             position: $viewModel.position ,
             selectedResult: $viewModel.selectedResult,
             lookAroundScene: $viewModel.lookAroundScene,
+            pins: viewModel.pins,
             expectedTravelTime: viewModel.expectedTravelTime,
             ruote: viewModel.route,
             searchResults: viewModel.searchResults,
-
         )
         MapBottomSheet(
             selectedResult: viewModel.selectedResult,

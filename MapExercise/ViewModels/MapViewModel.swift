@@ -21,6 +21,7 @@ import CoreLocation
      var searchResults: [MKMapItem] = []
      var visibleRegion: MKCoordinateRegion?
      var lookAroundScene: MKLookAroundScene?
+     var pins: [Pin] = DataLoader().loadPins()
      var position: MapCameraPosition = .automatic
      var selectedCoordinate: CLLocationCoordinate2D?
      var locationAuthorizationStatus: CLAuthorizationStatus?
