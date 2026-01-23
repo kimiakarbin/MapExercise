@@ -18,30 +18,30 @@ struct MapActionButtonsView : View {
     var body: some View {
         HStack {
             Button {
-                onSearchSelected ( "park")
+                onSearchSelected ("park")
             } label: {
-                    Label("park", systemImage: "tree")
+                    Label("park.city", systemImage: "tree")
                 }
                 .buttonStyle(.borderedProminent)
             
             Button {
-                onSearchSelected("taxi stand")
+                onSearchSelected("taxi_stand")
             } label: {
-                Label("taxi stand", systemImage: "car.rear")
+                Label("taxi.stand", systemImage: "car.rear")
             }
             .buttonStyle(.borderedProminent)
             
             Button {
                 onPosition(.region(.turin))
             } label: {
-                Label("Turin", systemImage: "house")
+                Label("city.turin", systemImage: "house")
             }
             .buttonStyle(.bordered)
             
             Button {
                 onPosition(.region(.milan))
             } label: {
-                Label("Milan", systemImage: "building.2")
+                Label("city.milan", systemImage: "building.2")
             }
             .buttonStyle(.bordered)
             

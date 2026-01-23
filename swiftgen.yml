@@ -1,0 +1,6 @@
+strings:
+  inputs:
+    - MapExercise/Resources/Localizable.xcstrings
+  outputs:
+    templateName: structured-swift5
+    output: MapExercise/Generated/L10n.swift

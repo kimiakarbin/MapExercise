@@ -1,0 +1,13 @@
+#
+#//  swiftgen.yml
+#//  MapExercise
+#//
+#//  Created by KimiaKarbin on 19/01/26.
+#//
+
+strings:
+  inputs:
+    - MapExercise/Resources/Localizable.xcstrings
+  outputs:
+    - templateName: structured-swift5
+      output: MapExercise/Generated/L10n.swift
