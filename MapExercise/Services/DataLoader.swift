@@ -7,7 +7,9 @@
 import Foundation
 
 class DataLoader {
+    
     func loadPins() -> [Pin] {
+        
         if let url = Bundle.main.url(forResource: "pins", withExtension: "json") {
             if let data = try? Data(contentsOf: url) {
                 let decoder = JSONDecoder()

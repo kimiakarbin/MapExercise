@@ -7,26 +7,21 @@
 
 import MapKit
 
+
 class RouteService {
-    func requestRoute(
-        destination: MKMapItem,
-        completion: @escaping (MKRoute?) -> Void
-    ) {
+    
+    func requestRoute(destination: MKMapItem) async throws -> MKRoute {
+        
         let request = MKDirections.Request()
         request.source = MKMapItem/*(placemark:MKPlacemark(coordinate: .parking))*/.forCurrentLocation()
         request.destination = destination
+        let directions = MKDirections(request: request)
+        let response = try await directions.calculate()
         
-      Task {
-         let directions = MKDirections(request: request)
-         let response = try? await directions.calculate()
-         completion(response?.routes.first)
-         
-        }
+        return response.routes.first!
     }
-
-    
-    
 }
+
 
 
 

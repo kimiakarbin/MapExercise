@@ -26,7 +26,11 @@ struct MapScreen: View {
             selectedResult: viewModel.selectedResult,
             expectedTravelTime: viewModel.expectedTravelTime,
             lookAroundScene: viewModel.lookAroundScene,
-            onSearch: { query in viewModel.search(for: query) },
+            onSearch: { query in
+                Task {
+                    try await viewModel.search(for: query)
+                }
+            },
             onPositionChange: { region in viewModel.position = region },
            
         )
@@ -36,9 +40,9 @@ struct MapScreen: View {
         }
         
         .onChange(of: viewModel.selectedResult) { oldValue, newValue in
-            if let newValue = newValue, oldValue != newValue {
-                viewModel.requestRoute(destination: newValue)
-                viewModel.getLookAroundScene(for: newValue)
+            guard let newValue else { return }
+            Task {
+                try await viewModel.resultSelected(result: newValue)
             }
         }
         

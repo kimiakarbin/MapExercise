@@ -7,20 +7,22 @@
 
 import MapKit
 
-class SearchService{
+class SearchService {
+    
     func search(
         for query: String,
         region: MKCoordinateRegion,
-        completion: @escaping ([MKMapItem]) -> Void
-    ){
+    ) async throws -> [MKMapItem] {
+        
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .pointOfInterest
         request.region = region
-        Task {
-            let search = MKLocalSearch(request: request)
-            let response = try? await search.start()
-            completion(response?.mapItems ?? [])
-        }
+        
+        let search = MKLocalSearch(request: request)
+        let response = try await search.start()
+
+        return response.mapItems
     }
 }
+
